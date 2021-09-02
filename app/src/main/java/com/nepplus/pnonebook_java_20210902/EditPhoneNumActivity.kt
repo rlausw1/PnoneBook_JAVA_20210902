@@ -8,6 +8,10 @@ import kotlinx.android.synthetic.main.activity_edit_phone_num.*
 import java.util.*
 
 class EditPhoneNumActivity : BaseActivity() {
+
+//    선택된 날짜의 기본값 : 화면을 연 일시
+    val mSelectedDate = Calendar.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_phone_num)
@@ -29,9 +33,14 @@ class EditPhoneNumActivity : BaseActivity() {
                 }
 
             }
+//달력 띄울때 넣는 날짜? 기본 선택값을 넣자
+//            기본 선택값 : 오늘 날짜 => Calendar를 하나 만들면 기본값이 오늘날짜
+//            calendar 만든다 : 멤버변수로 만들어서 -> 선택된 값을 저장하는 용도로도
 
             val datePickerDialog = DatePickerDialog(mContext, dateSetListener,
-                2021,Calendar.SEPTEMBER,2)
+                mSelectedDate.get(Calendar.YEAR),
+                mSelectedDate.get(Calendar.MONTH),
+                mSelectedDate.get(Calendar.DAY_OF_MONTH))
 
             datePickerDialog.show()
 
