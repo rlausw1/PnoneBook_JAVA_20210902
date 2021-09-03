@@ -7,6 +7,8 @@ import android.view.View
 import com.nepplus.pnonebook_java_20210902.adapter.PhoneNumAdapter
 import com.nepplus.pnonebook_java_20210902.datas.PhoneNumData
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.BufferedReader
+import java.io.FileReader
 
 class MainActivity : BaseActivity() {
 
@@ -50,10 +52,11 @@ class MainActivity : BaseActivity() {
         //    임시 방편 : 직접 리스트에 데이터 객체 추가
 
 //    수정 방안 -> 파일을 불러와서 그 내용을 읽고 , PhoneNumData() 로 변환
+readPhoneBookFromFile()
 
-        mPhoneNumList.add(PhoneNumData("테스트1", "010-1111-2222"))
-        mPhoneNumList.add(PhoneNumData("테스트2", "010-1111-3333"))
-        mPhoneNumList.add(PhoneNumData("테스트3", "010-1111-4444"))
+//        mPhoneNumList.add(PhoneNumData("테스트1", "010-1111-2222"))
+//        mPhoneNumList.add(PhoneNumData("테스트2", "010-1111-3333"))
+//        mPhoneNumList.add(PhoneNumData("테스트3", "010-1111-4444"))
 
         mAdapter = PhoneNumAdapter(mContext, R.layout.phone_num_list_item, mPhoneNumList)
 
@@ -62,5 +65,28 @@ class MainActivity : BaseActivity() {
 
     }
 
+    fun readPhoneBookFromFile() {
+
+        val myFile - File(filesDir, "phoneBook.txt")
+        val fr = FileReader(myFile)
+        val br = BufferedReader(fr)
+
+        while(true) {
+
+            val line = br.readLine()
+            if (line == null) {
+
+
+                break
+            }
+            val infos = line.split(",")
+            val phoneNumData = PhoneNumData(infos[0], infos[1])
+            mPhoneNumList.add(phoneNumData)
+
+
+
+                }
+
+       }
 
     }
