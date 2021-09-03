@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.DatePicker
+import com.nepplus.pnonebook_java_20210902.datas.PhoneNumData
 import kotlinx.android.synthetic.main.activity_edit_phone_num.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,7 +30,9 @@ class EditPhoneNumActivity : BaseActivity() {
 
 //            생년월이 (calendar) -> 1988-05-05 String => simpeDataFormat
             val sdf = SimpleDateFormat("yyyy-MM-dd")
-            val birthDayStr = sdf.format(mSelectedDate.time)
+
+//            날짜로 저장할 String은 PhoneNUmData
+//            val birthDayStr = sdf.format(mSelectedDate.time)
 
 //            2. 폰번 데이터 객체로 만들자 ( 클래스 추가)
             val savePhoneNumData = PhoneNumData(inputName, inputPhoneNum)
@@ -39,6 +42,9 @@ class EditPhoneNumActivity : BaseActivity() {
 
 
 //            3. 이름/폰번/생년 양식으로 가공 -> 파일에 저장
+            val saveStr = savePhoneNumData.getFileFormatData()
+            Log.d("파일에저장할문장", saveStr)
+
 
         }
 
