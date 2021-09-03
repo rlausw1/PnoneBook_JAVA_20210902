@@ -10,7 +10,7 @@ import java.util.*
 
 class EditPhoneNumActivity : BaseActivity() {
 
-//    선택된 날짜의 기본값 : 화면을 연 일시
+    //    선택된 날짜의 기본값 : 화면을 연 일시
     val mSelectedDate = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,16 +32,20 @@ class EditPhoneNumActivity : BaseActivity() {
             val birthDayStr = sdf.format(mSelectedDate.time)
 
 //            2. 폰번 데이터 객체로 만들자 ( 클래스 추가)
+            val savePhoneNumData = PhoneNumData(inputName, inputPhoneNum)
+//            폰번데이터의 생년월일 -> 선택한 날짜에 적힌 년월일 그대로 대입
+//            하나의 calendar값 -> 다른 calendar에 옮겨적기
+            savePhoneNumData.birthDay.time = mSelectedDate.time
 
 
 //            3. 이름/폰번/생년 양식으로 가공 -> 파일에 저장
 
         }
 
-        selectBirthDayBtn.setOnClickListener{
+        selectBirthDayBtn.setOnClickListener {
 //          달력처럼, 날짜 선택 팝업 출현
 
-            val dateSetListener = object : DatePickerDialog.OnDateSetListener{
+            val dateSetListener = object : DatePickerDialog.OnDateSetListener {
                 override fun onDateSet(p0: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
 
 //            날짜가 선택되면 실행해줄 코드(년/월/일 세개의 Int 가지고 처리)
@@ -52,7 +56,7 @@ class EditPhoneNumActivity : BaseActivity() {
 //                    1988.10.28 양식으로 가공
 
                     val sdf = SimpleDateFormat("yyyy. MM. dd ")
-                    birthDayTxt.text = sdf.format( mSelectedDate.time)
+                    birthDayTxt.text = sdf.format(mSelectedDate.time)
 
                 }
 
@@ -61,10 +65,12 @@ class EditPhoneNumActivity : BaseActivity() {
 //            기본 선택값 : 오늘 날짜 => Calendar를 하나 만들면 기본값이 오늘날짜
 //            calendar 만든다 : 멤버변수로 만들어서 -> 선택된 값을 저장하는 용도로도
 
-            val datePickerDialog = DatePickerDialog(mContext, dateSetListener,
+            val datePickerDialog = DatePickerDialog(
+                mContext, dateSetListener,
                 mSelectedDate.get(Calendar.YEAR),
                 mSelectedDate.get(Calendar.MONTH),
-                mSelectedDate.get(Calendar.DAY_OF_MONTH))
+                mSelectedDate.get(Calendar.DAY_OF_MONTH)
+            )
 
             datePickerDialog.show()
 

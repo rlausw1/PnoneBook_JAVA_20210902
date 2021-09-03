@@ -3,10 +3,14 @@ package com.nepplus.pnonebook_java_20210902.datas
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PhoneNumData {
+class PhoneNumData(var name: String, var phoneNum: String, birthDay: Calendar) {
 
-    var name = "" //name에 String이 들어올거라고 암시
-    var phoneNum = ""
+//    init {
+////        생성자가 실행될떄 추가 동작시킬 코드 작성
+//        this.name = name
+//    }
+
+
     val birthDay = Calendar.getInstance() //기본값 : 오늘 날짜
     //set 기능으로 내부에 적힌 값을 바꿈 -> 새 객체를 집어 넣는 방식이 아님
     //변수의 입장에서는 연결된 객체가 바뀔일이 없다 -> val로 만들어주자
@@ -17,7 +21,7 @@ class PhoneNumData {
     val fileDateFormat = SimpleDateFormat("yyyy-MM-dd")
 
 
-    fun getFileFormatData() : String {
+    fun getFileFormatData(): String {
 
 //        코틀린에서 String 가공
 //    벌스데이(Calendar) 가공
