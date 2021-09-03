@@ -3,9 +3,14 @@ package com.nepplus.pnonebook_java_20210902
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.widget.DatePicker
 import com.nepplus.pnonebook_java_20210902.datas.PhoneNumData
 import kotlinx.android.synthetic.main.activity_edit_phone_num.*
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -88,6 +93,40 @@ class EditPhoneNumActivity : BaseActivity() {
 
     override fun setValues() {
 
+
+    }
+    fun savePhoneNumToFile(contnet : String) {
+
+        val mainFolder = File${Environment.getExtranalStorageDirectory()}/phoneBookData")
+
+        var success = true
+        if (!mainFolder.exists()) {
+            success = mainFolder.mkdir()
+        }
+        if (success) {
+            val myFile = File("phoneNumDta.txt")
+
+            if (!myFile.exists()) {
+                success myFile.mkdir()
+            }
+            if (success) {
+//                폴더/파일 준비 상태
+//                최종 결로 설정
+                val realFilePath = File(mainFolder, "phoneNumData")
+                val fw = FileWriter(realFilePath)
+                val bw = BufferedWriter(fw)
+
+                bw.append(content)
+                bw.newLine()
+
+                bw.close()
+                fw.close()
+
+                Log.d("폰번호추가성공", content)
+
+            }
+
+        }
 
     }
 }
