@@ -32,6 +32,8 @@ class EditPhoneNumActivity : BaseActivity() {
             val birthDayStr = sdf.format(mSelectedDate.time)
 
 //            2. 폰번 데이터 객체로 만들자 ( 클래스 추가)
+
+
 //            3. 이름/폰번/생년 양식으로 가공 -> 파일에 저장
 
         }
