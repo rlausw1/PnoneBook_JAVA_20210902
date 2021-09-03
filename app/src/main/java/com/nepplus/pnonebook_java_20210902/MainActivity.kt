@@ -9,6 +9,7 @@ import com.nepplus.pnonebook_java_20210902.datas.PhoneNumData
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.BufferedReader
 import java.io.FileReader
+import java.text.SimpleDateFormat
 
 class MainActivity : BaseActivity() {
 
@@ -71,6 +72,8 @@ readPhoneBookFromFile()
         val fr = FileReader(myFile)
         val br = BufferedReader(fr)
 
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+
         while(true) {
 
             val line = br.readLine()
@@ -81,6 +84,14 @@ readPhoneBookFromFile()
             }
             val infos = line.split(",")
             val phoneNumData = PhoneNumData(infos[0], infos[1])
+
+//            실제 입력한 생년월일로 바꿔주기
+//            "1991-05-05"로 분리된 String을 기반으로 => phoneNumData의 일자로 저장
+//            SimpleDateFormat의 parse 기능 활용
+
+            phoneNumData.birthDay.time = sdf.parse(infos[2])
+
+
             mPhoneNumList.add(phoneNumData)
 
 
