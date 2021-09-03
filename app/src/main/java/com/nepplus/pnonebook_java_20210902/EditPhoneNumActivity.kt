@@ -50,6 +50,8 @@ class EditPhoneNumActivity : BaseActivity() {
             val saveStr = savePhoneNumData.getFileFormatData()
             Log.d("파일에저장할문장", saveStr)
 
+            savePhoneNumToFile(saveStr)
+
 
         }
 
@@ -95,19 +97,34 @@ class EditPhoneNumActivity : BaseActivity() {
 
 
     }
+
+//    문장을 넘겨받아서, 폰의 파일에 기록해주는 기능
+
     fun savePhoneNumToFile(contnet : String) {
 
-        val mainFolder = File${Environment.getExtranalStorageDirectory()}/phoneBookData")
+//        (폰내부의) 파일 결로 설정 -> 해당 경로에 파일 기록
+//        sd카드의 경로를 먼저 받아오자 + 우리 파일 저장 경로 설정 (/phoneBookData 폴더)
+
+        val mainFolder = File("${Environment.getExternalStoragePublicDirectory()}/phoneBookData")
+
+//        그 폴더가 진짜 있나? 확인, 없으면 만들자
 
         var success = true
         if (!mainFolder.exists()) {
+//            성공 여부 저장
             success = mainFolder.mkdir()
         }
+
+//        폴더가 만들어 졌다면
         if (success) {
+
+//            파일 이름만 따로 저장
             val myFile = File("phoneNumDta.txt")
 
             if (!myFile.exists()) {
-                success myFile.mkdir()
+//                파일이 아직 없다면 만들어주자
+
+                success = myFile.mkdir()
             }
             if (success) {
 //                폴더/파일 준비 상태
