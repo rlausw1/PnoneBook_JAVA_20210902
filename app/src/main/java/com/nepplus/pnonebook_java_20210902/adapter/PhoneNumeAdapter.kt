@@ -26,6 +26,15 @@ class PhoneNumAdapter(val mContext : Context,
 
         val nameTxt = row.findViewById<TextView>(R.id.nameTxt)
         val birthDatTxt = row.findViewById<TextView>(R.id.birthDayTxt)
+        val phoneNumTxt = row.findViewById<TextView>(R.id.phoneNumTxt)
+
+        val data = mList.get(position)
+        nameTxt.text = data.name
+        phoneNumTxt.text = data.phoneNum
+
+//        nameTxt.setText(data.getName() )
+
+        birthDatTxt.text = data.getFormattedBirthday()
 
         return row
 
