@@ -4,9 +4,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.nepplus.pnonebook_java_20210902.adapter.PhoneNumAdapter
+import com.nepplus.pnonebook_java_20210902.datas.PhoneNumData
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
+
+    val mPhoneNumList = ArrayList<PhoneNumData>()
+
+
+
+    lateinit var mAdapter : PhoneNumAdapter
+
 
 //    0.전화번호 추가 기능 -> 별도 화면에서 저장시키자
 
@@ -38,6 +47,20 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setValues() {
+        //    임시 방편 : 직접 리스트에 데이터 객체 추가
+
+//    수정 방안 -> 파일을 불러와서 그 내용을 읽고 , PhoneNumData() 로 변환
+
+        mPhoneNumList.add(PhoneNumData("테스트1", "010-1111-2222"))
+        mPhoneNumList.add(PhoneNumData("테스트2", "010-1111-3333"))
+        mPhoneNumList.add(PhoneNumData("테스트3", "010-1111-4444"))
+
+        mAdapter = PhoneNumAdapter(mContext, R.layout.phone_num_list_item, mPhoneNumList)
+
+//        리스트뷰의 어댑터로 연결
+        phoneNumListView.adapter = mAdapter
 
     }
-}
+
+
+    }
